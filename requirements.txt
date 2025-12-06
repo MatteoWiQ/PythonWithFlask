@@ -1,0 +1,4 @@
+# Dependencias de Python necesarias para el proyecto
+Flask
+pymongo
+certifi
