@@ -1,0 +1,32 @@
+<!-- Modal Confirm Component -->
+<!-- Uso: include 'components/modal_confirm.html' -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h1 class="modal-title fs-5" id="confirmModalLabel">Confirmar Acción</h1>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p id="confirmMessage">¿Estás seguro de que deseas continuar? Esta acción no se puede deshacer.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger" id="confirmBtn">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function showConfirm(message, callback) {
+    document.getElementById('confirmMessage').textContent = message;
+    const modal = new bootstrap.Modal(document.getElementById('confirmModal'));
+    modal.show();
+
+    document.getElementById('confirmBtn').onclick = function () {
+      modal.hide();
+      callback();
+    };
+  }
+</script>
