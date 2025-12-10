@@ -1,4 +1,7 @@
 # Dependencias de Python necesarias para el proyecto
-Flask
-pymongo
-certifi
+# Gestión de Productos - Joyería con Flask y MongoDB
+
+Flask>=2.0.0
+pymongo>=4.0.0
+certifi>=2023.0.0
+

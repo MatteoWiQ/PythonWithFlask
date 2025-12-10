@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.get('name', 'Producto') }} - Joyería{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{{ url_for('product.index') }}">Productos</a></li>
+                <li class="breadcrumb-item active">{{ product.get('name', 'Detalle') }}</li>
+            </ol>
+        </nav>
+
+        <div class="card mb-4">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    {% if product.get('image_filename') and product.get('image_filename') != 'default.png' %}
+                        <img src="{{ url_for('static', filename='uploads/' + product.get('image_filename')) }}"
+                            class="img-fluid rounded-start product-image" alt="{{ product.get('name') }}">
+                    {% else %}
+                        <div class="d-flex align-items-center justify-content-center bg-light" 
+                             style="height: 300px; border-radius: 8px;">
+                            <div class="text-center">
+                                <i class="bi bi-image text-muted" style="font-size: 4rem;"></i>
+                                <p class="text-muted mt-3">Sin imagen</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title mb-3">{{ product.get('name', 'N/A') }}</h2>
+                        
+                        <div class="mb-3">
+                            <span class="badge bg-primary">{{ product.get('category', 'Sin Categoría') }}</span>
+                        </div>
+
+                        <p class="card-text text-muted mb-4">
+                            {{ product.get('description', 'Sin descripción') }}
+                        </p>
+
+                        <ul class="list-group list-group-flush mb-4">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Precio:</strong>
+                                <span class="fs-5 text-success font-monospace">${{ "%.2f"|format(product.get('price', 0)) }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <strong>Stock Disponible:</strong>
+                                {% set stock = product.get('stock', 0) %}
+                                {% if stock < 5 %}
+                                    <span class="badge bg-danger">{{ stock }} unidades</span>
+                                {% elif stock < 20 %}
+                                    <span class="badge bg-warning text-dark">{{ stock }} unidades</span>
+                                {% else %}
+                                    <span class="badge bg-success">{{ stock }} unidades</span>
+                                {% endif %}
+                            </li>
+                        </ul>
+
+                        <div class="d-flex gap-2">
+                            <a href="{{ url_for('product.edit_get', product_id=product._id) }}"
+                                class="btn btn-warning">
+                                <i class="bi bi-pencil"></i> Editar
+                            </a>
+                            <a href="{{ url_for('product.delete_get', product_id=product._id) }}"
+                                class="btn btn-danger">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </a>
+                            <a href="{{ url_for('product.index') }}" class="btn btn-outline-primary ms-auto">
+                                <i class="bi bi-arrow-left"></i> Volver a la lista
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

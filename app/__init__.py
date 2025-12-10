@@ -1,5 +1,6 @@
 from flask import Flask
 import os
+
 # Constante de tamaño máximo de imagen en bytes
 MAX_IMAGE_SIZE = 6 * 1024 * 1024  # 6 MB
 
@@ -14,4 +15,11 @@ def create_app():
     
     from .routes.product_routes import product_bp
     app.register_blueprint(product_bp)
+    
+    # Ruta raíz - redirecciona a /products
+    @app.route('/')
+    def index():
+        from flask import redirect, url_for
+        return redirect(url_for('product.index'))
+    
     return app
