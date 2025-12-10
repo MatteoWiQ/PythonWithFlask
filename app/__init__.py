@@ -5,7 +5,7 @@ MAX_IMAGE_SIZE = 6 * 1024 * 1024  # 6 MB
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('config')
+    # app.config.from_object('config')
     
     # Configuracion para subir imagenes
     app.config['UPLOAD_FOLDER'] = os.path.join(app.root_path, 'static', 'uploads')
