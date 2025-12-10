@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 
 # localhost
-MONGO_URI = 'mongodb://localhost:27017/'
+MONGO_URI = 'mongodb+srv://mateo:mateo@cluster0.kipdlog.mongodb.net/?appName=Cluster0'
 
 def dbConnection():
     try:
